@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/codigo_mvp_basico/backend/betyl-products-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/codigo_mvp_basico/backend/betyl-soul-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/codigo_mvp_basico/backend/stone-bridge-service" vcs="Git" />
+  </component>
+</project>

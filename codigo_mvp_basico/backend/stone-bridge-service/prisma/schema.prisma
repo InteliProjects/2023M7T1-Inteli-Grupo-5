@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  email       String  @unique
+  name  String
+  surname   String
+  phone   String
+  password    String
+  pix   String
+  question String
+  answer String
+  CPF String @unique
+  CNPJ String @unique
+  opensAt String
+  closesAt String 
+  workingDays WorkingDay[]
+  segments Segment[]
+  orders Order[]
+  addresses Address[]
+  products Product[] 
+}
+
+model Product {
+  id        Int     @id @default(autoincrement())
+  name      String
+  category String
+  price     Float
+  image    String
+  description   String
+  user User @relation(fields: [userId], references: [id])
+  userId    Int 
+  products Order[]
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  product   Product   @relation(fields: [productId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+  productId  Int
+  userId    Int
+  deliveryDate DateTime @default(now())
+  status Status @default(PROCESSING)
+}
+
+model Address {
+  id          Int           @id @default(autoincrement())
+  zipCode   String
+  country   String
+  state   String
+  city    String
+  neighborhood    String
+  street    String
+  addressLine    String
+  user User @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model WorkingDay {
+  id Int @id @default(autoincrement())
+  day String
+  users User[]
+}
+
+model Segment {
+  id Int @id @default(autoincrement())
+  name String
+  users User[]
+}
+
+enum Status { 
+  PROCESSING
+  SHIPPING
+  DELIVERED
+}
